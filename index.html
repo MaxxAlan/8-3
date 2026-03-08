@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy March 8th | For You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-pink: #ff85a2;
+            --dark-pink: #f72585;
+            --glass: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: #ffe5ec;
+            background: linear-gradient(45deg, #ffc2d1, #ffe5ec, #fb6f92);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .heart-icon {
+            font-size: 50px;
+            color: var(--dark-pink);
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--dark-pink);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .photo-frame {
+            width: 100%;
+            height: 350px;
+            background: #eee;
+            border-radius: 15px;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 5px solid white;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message {
+            line-height: 1.6;
+            color: #444;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .gif-container {
+            width: 100px;
+            margin: 10px auto;
+        }
+
+        .btn-play {
+            background: var(--dark-pink);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-play:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.4);
+        }
+
+        /* Hiệu ứng pháo bông tim */
+        .heart-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: fall 3s linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="heart-icon">❤</div>
+        <h1>Happy Women's Day!</h1>
+
+        <div class="photo-frame">
+            <img src="src/642650709_1472777954257227_4880344866670508419_n.jpg"Our Memory" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZnl4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTfuxV4ZfUvJzG/giphy.gif'">
+        </div>
+
+        <div class="message">
+            <p>
+                Gởi nàng, <br><br>
+                Nếu coi cuộc đời anh là một hệ thống thì em chính là <b>root</b> — điểm khởi đầu và cũng là điều quan trọng nhất. 
+                Chúc em hạnh phúc mỗi ngày. Vạn điều như ý. 
+                <br><br>
+                Chúc em 8/3 luôn rạng rỡ, không bao giờ gặp <i>bug</i> trong cuộc sống và lúc nào cũng <i>uptrime 100%</i> niềm vui nhé!
+            </p>
+        </div>
+
+        <div class="photo-frame">
+            <img src="src/643537369_2972232356315375_47997415612557091_n.jpg"Our Memory" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZnl4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTfuxV4ZfUvJzG/giphy.gif'">
+        </div>
+
+        <button class="btn-play" onclick="toggleMusic()">Bật nhạc lên nè 🎵</button>
+        
+        <audio id="bgMusic" loop>
+            <source src="src/music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // Hiệu ứng tim rơi khi click
+        document.addEventListener('click', (e) => {
+            for(let i=0; i<5; i++) {
+                createHeart(e.clientX, e.clientY);
+            }
+        });
+
+        function createHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.className = 'heart-particle';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            heart.style.color = `hsl(${Math.random() * 30 + 330}, 100%, 70%)`;
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            
+            const destinationX = (Math.random() - 0.5) * 200;
+            heart.animate([
+                { transform: `translate(0, 0)` },
+                { transform: `translate(${destinationX}px, 100vh)` }
+            ], {
+                duration: Math.random() * 2000 + 1000,
+                easing: 'cubic-bezier(0, .9, .57, 1)'
+            });
+
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2000);
+        }
+
+        // Điều khiển nhạc
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.querySelector('.btn-play');
+            if (music.paused) {
+                music.play().catch(e => alert("Hãy kiểm tra đường dẫn file nhạc trong src/music!"));
+                btn.innerHTML = "Tắt nhạc ⏸";
+            } else {
+                music.pause();
+                btn.innerHTML = "Bật nhạc lên nè 🎵";
+            }
+        }
+
+        // Tự động tạo vài trái tim rơi cho đẹp
+        setInterval(() => {
+            createHeart(Math.random() * window.innerWidth, -20);
+        }, 500);
+    </script>
+</body>
+</html>
